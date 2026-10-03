@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiBlog - Portal Analisis Logika Informatika</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.7);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .truth-table th, .truth-table td {
+            text-align: center;
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .dark .truth-table th, .dark .truth-table td {
+            border-color: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-300">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-200 dark:border-slate-800 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-brain text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight gradient-text">LogiBlog</span>
+                    <span class="hidden sm:inline-block text-xs font-bold px-2.5 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 ml-2 border border-indigo-200 dark:border-indigo-800">Tugas Pak Zurnan</span>
+                </div>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+                <a href="#berita" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Daftar Artikel</a>
+                <a href="#materi" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Modul Panduan</a>
+                <a href="#kalkulator" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Simulator Logika</a>
+            </nav>
+
+            <!-- Theme Toggle -->
+            <div class="flex items-center gap-3">
+                <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 transition-all" title="Ubah Tema">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="relative py-12 lg:py-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 text-xs font-bold text-indigo-700 dark:text-indigo-300 mb-4 shadow-sm">
+                    <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    Tugas Logika Informatika — Analisis Proposisi & Inferensi
+                </div>
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+                    Portal Bedah <span class="gradient-text">Logika Informatika</span>
+                </h1>
+                <p class="mt-4 text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                    Kajian komprehensif atas <strong>5 Berita Fakta</strong> dan <strong>1 Cerita Rakyat</strong> berbasis <strong>Proposisi, Premis, Inferensi, Variasi Implikasi (Konvers, Invers, Kontraposisi), Kuantor (∀, ∃)</strong> &amp; <strong>Tabel Kebeneran</strong>.
+                </p>
+
+                <!-- Key Concept Badges -->
+                <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-6 text-xs font-bold">
+                    <span class="px-3 py-1.5 rounded-lg bg-indigo-100 dark:bg-indigo-950/80 text-indigo-800 dark:text-indigo-200 border border-indigo-200 dark:border-indigo-800"><i class="fa-solid fa-font mr-1.5"></i> Proposisi (p, q)</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-purple-100 dark:bg-purple-950/80 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-purple-800"><i class="fa-solid fa-arrows-split-up-and-left mr-1.5"></i> Implikasi, Konvers, Invers, Kontraposisi</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-pink-100 dark:bg-pink-950/80 text-pink-800 dark:text-pink-200 border border-pink-200 dark:border-pink-800"><i class="fa-solid fa-diagram-project mr-1.5"></i> Premis &amp; Modus Ponens</span>
+                    <span class="px-3 py-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-800"><i class="fa-solid fa-infinity mr-1.5"></i> Kuantor (∀ &amp; ∃)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concept Cheatsheet -->
+    <section id="materi" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-lg">
+            <h3 class="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2 mb-4">
+                <i class="fa-solid fa-book-bookmark text-indigo-600"></i> Ringkasan Konsep Logika Informatika
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                <div class="p-4 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800">
+                    <div class="font-extrabold text-indigo-700 dark:text-indigo-300 mb-1 text-sm"><i class="fa-solid fa-cube mr-1"></i> Proposisi &amp; Premis</div>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <strong>Proposisi (p, q):</strong> Pernyataan deklaratif bernilai Benar (B) atau Salah (S).<br>
+                        <strong>Premis:</strong> Asumsi dasar yang dipakai untuk penarikan kesimpulan.
+                    </p>
+                </div>
+                <div class="p-4 rounded-2xl bg-purple-50/80 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-800">
+                    <div class="font-extrabold text-purple-700 dark:text-purple-300 mb-1 text-sm"><i class="fa-solid fa-arrows-rotate mr-1"></i> Variasi Implikasi</div>
+                    <ul class="text-slate-600 dark:text-slate-300 space-y-1 font-mono">
+                        <li>• Implikasi: p &rarr; q</li>
+                        <li>• Konvers: q &rarr; p</li>
+                        <li>• Invers: &not;p &rarr; &not;q</li>
+                        <li>• Kontraposisi: &not;q &rarr; &not;p</li>
+                    </ul>
+                </div>
+                <div class="p-4 rounded-2xl bg-pink-50/80 dark:bg-pink-950/50 border border-pink-200 dark:border-pink-800">
+                    <div class="font-extrabold text-pink-700 dark:text-pink-300 mb-1 text-sm"><i class="fa-solid fa-gears mr-1"></i> Aturan Inferensi</div>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <strong>Modus Ponens:</strong> p &rarr; q, p &vdash; q<br>
+                        <strong>Modus Tollens:</strong> p &rarr; q, &not;q &vdash; &not;p<br>
+                        <strong>Silogisme:</strong> p &rarr; q, q &rarr; r &vdash; p &rarr; r
+                    </p>
+                </div>
+                <div class="p-4 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800">
+                    <div class="font-extrabold text-emerald-700 dark:text-emerald-300 mb-1 text-sm"><i class="fa-solid fa-globe mr-1"></i> Kuantor Predikat</div>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <strong>Universal (&forall;x):</strong> "Untuk semua / Setiap x berlaku P(x)"<br>
+                        <strong>Eksistensial (&exist;x):</strong> "Ada / Terdapat setidaknya satu x sehingga Q(x)"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content: Article Listing -->
+    <main id="berita" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-newspaper text-indigo-600"></i> Daftar Berita Fakta &amp; Cerita Rakyat
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Pilih salah satu artikel untuk membuka analisis logika informatika secara mendalam.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="filterArticles('all')" class="filter-btn active-filter px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md" data-filter="all">Semua Artikel (6)</button>
+                <button onclick="filterArticles('fakta')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700" data-filter="fakta">Berita Fakta (5)</button>
+                <button onclick="filterArticles('folklore')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700" data-filter="folklore">Cerita Rakyat (1)</button>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative mb-8">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="searchInput" onkeyup="searchArticles()" placeholder="Cari judul, kata kunci, konvers, kuantor, atau premis..." class="w-full pl-11 pr-4 py-3.5 rounded-2xl glass-card focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+        </div>
+
+        <!-- Articles Grid Container -->
+        <div id="articlesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic JS injected items -->
+        </div>
+    </main>
+
+    <!-- Interactive Logic Simulator Section -->
+    <section id="kalkulator" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xl">
+            <div class="max-w-3xl mx-auto text-center mb-8">
+                <span class="text-xs font-extrabold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Simulator &amp; Evaluator</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">Kalkulator Logika Formal Interaktif</h2>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2">Uji secara otomatis nilai kebenaran Implikasi, Konvers, Invers, Kontraposisi, Inferensi Modus Ponens/Tollens, dan Kuantor.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex justify-center border-b border-slate-200 dark:border-slate-800 mb-8 overflow-x-auto">
+                <button onclick="switchSimTab('implikasi')" id="tabBtnImplikasi" class="px-5 py-3 text-xs sm:text-sm font-bold border-b-2 border-indigo-600 text-indigo-600 dark:text-indigo-400">1. Variasi Implikasi</button>
+                <button onclick="switchSimTab('inferensi')" id="tabBtnInferensi" class="px-5 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">2. Aturan Inferensi</button>
+                <button onclick="switchSimTab('kuantor')" id="tabBtnKuantor" class="px-5 py-3 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">3. Kuantor (&forall;, &exist;)</button>
+            </div>
+
+            <!-- Tab 1: Variasi Implikasi Simulator -->
+            <div id="simTabImplikasi" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-5 space-y-4 bg-slate-100/70 dark:bg-slate-900/70 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nilai Proposisi p (Sebab)</label>
+                        <select id="calcP" onchange="calculateLogic()" class="w-full p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-medium text-sm">
+                            <option value="true">Benar (True / B / 1)</option>
+                            <option value="false">Salah (False / S / 0)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nilai Proposisi q (Akibat)</label>
+                        <select id="calcQ" onchange="calculateLogic()" class="w-full p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-medium text-sm">
+                            <option value="true">Benar (True / B / 1)</option>
+                            <option value="false">Salah (False / S / 0)</option>
+                        </select>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-xs text-indigo-900 dark:text-indigo-200 leading-relaxed">
+                        <strong>Hukum Ekuivalensi:</strong><br>
+                        &bull; Implikasi (p &rarr; q) &equiv; Kontraposisi (&not;q &rarr; &not;p)<br>
+                        &bull; Konvers (q &rarr; p) &equiv; Invers (&not;p &rarr; &not;q)
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="grid grid-cols-2 gap-3 text-center">
+                        <div class="p-4 rounded-xl bg-indigo-500/10 border border-indigo-500/30">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Implikasi (p &rarr; q)</span>
+                            <div id="resImplikasi" class="text-base font-extrabold mt-1 text-slate-900 dark:text-white">-</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/30">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-purple-600 dark:text-purple-400">Konvers (q &rarr; p)</span>
+                            <div id="resKonvers" class="text-base font-extrabold mt-1 text-slate-900 dark:text-white">-</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-pink-500/10 border border-pink-500/30">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-pink-600 dark:text-pink-400">Invers (&not;p &rarr; &not;q)</span>
+                            <div id="resInvers" class="text-base font-extrabold mt-1 text-slate-900 dark:text-white">-</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Kontraposisi (&not;q &rarr; &not;p)</span>
+                            <div id="resKontraposisi" class="text-base font-extrabold mt-1 text-slate-900 dark:text-white">-</div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Truth Matrix Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs font-mono truth-table rounded-xl overflow-hidden bg-white dark:bg-slate-900">
+                            <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold">
+                                <tr>
+                                    <th>p</th>
+                                    <th>q</th>
+                                    <th>p &rarr; q</th>
+                                    <th>q &rarr; p</th>
+                                    <th>&not;p &rarr; &not;q</th>
+                                    <th>&not;q &rarr; &not;p</th>
+                                </tr>
+                            </thead>
+                            <tbody id="calcMatrixBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Inferensi Logic -->
+            <div id="simTabInferensi" class="hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 space-y-2">
+                        <span class="px-2 py-0.5 rounded bg-indigo-600 text-white text-[10px] font-black">HUKUM 1</span>
+                        <h4 class="font-extrabold text-sm text-indigo-900 dark:text-indigo-200">Modus Ponens</h4>
+                        <div class="font-mono text-xs bg-white dark:bg-slate-900 p-3 rounded-xl border border-indigo-100 dark:border-slate-800 leading-relaxed">
+                            Premis 1: p &rarr; q<br>
+                            Premis 2: p<br>
+                            <hr class="my-1.5 border-slate-300 dark:border-slate-700">
+                            <strong>Kesimpulan: q (Valid)</strong>
+                        </div>
+                        <p class="text-[11px] text-slate-600 dark:text-slate-400">Mengkonfirmasi p (sebab) secara otomatis membuktikan q (akibat).</p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 space-y-2">
+                        <span class="px-2 py-0.5 rounded bg-purple-600 text-white text-[10px] font-black">HUKUM 2</span>
+                        <h4 class="font-extrabold text-sm text-purple-900 dark:text-purple-200">Modus Tollens</h4>
+                        <div class="font-mono text-xs bg-white dark:bg-slate-900 p-3 rounded-xl border border-purple-100 dark:border-slate-800 leading-relaxed">
+                            Premis 1: p &rarr; q<br>
+                            Premis 2: &not;q<br>
+                            <hr class="my-1.5 border-slate-300 dark:border-slate-700">
+                            <strong>Kesimpulan: &not;p (Valid)</strong>
+                        </div>
+                        <p class="text-[11px] text-slate-600 dark:text-slate-400">Menyangkal q (akibat) membuktikan bahwa p (sebab) tidak terjadi.</p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-pink-50 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-800 space-y-2">
+                        <span class="px-2 py-0.5 rounded bg-pink-600 text-white text-[10px] font-black">HUKUM 3</span>
+                        <h4 class="font-extrabold text-sm text-pink-900 dark:text-pink-200">Silogisme Hipotetis</h4>
+                        <div class="font-mono text-xs bg-white dark:bg-slate-900 p-3 rounded-xl border border-pink-100 dark:border-slate-800 leading-relaxed">
+                            Premis 1: p &rarr; q<br>
+                            Premis 2: q &rarr; r<br>
+                            <hr class="my-1.5 border-slate-300 dark:border-slate-700">
+                            <strong>Kesimpulan: p &rarr; r (Valid)</strong>
+                        </div>
+                        <p class="text-[11px] text-slate-600 dark:text-slate-400">Menghubungkan dua implikasi berantai secara konsisten.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Kuantor Logic -->
+            <div id="simTabKuantor" class="hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-emerald-600 text-white font-mono font-bold flex items-center justify-center">&forall;</span>
+                            <h4 class="font-extrabold text-base text-slate-900 dark:text-white">Kuantor Universal (&forall;x)</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                            Pernyataan <strong>&forall;x, P(x)</strong> bernilai <strong>BENAR</strong> jika sifat P(x) berlaku untuk <u>SELURUH</u> anggota domain tanpa terkecuali.
+                        </p>
+                        <div class="p-3 bg-white dark:bg-slate-800 rounded-xl font-mono text-xs border border-slate-200 dark:border-slate-700">
+                            Contoh: &forall;x &isin; Peneliti_AI, x(Membutuhkan_Daya_Komputasi)
+                        </div>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-mono font-bold flex items-center justify-center">&exist;</span>
+                            <h4 class="font-extrabold text-base text-slate-900 dark:text-white">Kuantor Eksistensial (&exist;x)</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                            Pernyataan <strong>&exist;x, Q(x)</strong> bernilai <strong>BENAR</strong> jika ditemukan <u>SETIDAKNYA SATU</u> anggota domain x yang memenuhi Q(x).
+                        </p>
+                        <div class="p-3 bg-white dark:bg-slate-800 rounded-xl font-mono text-xs border border-slate-200 dark:border-slate-700">
+                            Contoh: &exist;x &isin; Pesisir_Pantai, x(Terkena_Dampak_Banjir_Rob)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Detail Modal -->
+    <div id="articleModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+        <div class="relative w-full max-w-5xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden my-6 max-h-[92vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="p-5 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between gap-4 bg-slate-50 dark:bg-slate-900/80">
+                <div>
+                    <span id="modalCategoryBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Category</span>
+                    <h3 id="modalTitle" class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-2">Title</h3>
+                    <p id="modalMeta" class="text-xs text-slate-500 mt-1">Tanggal Publikasi</p>
+                </div>
+                <button onclick="closeModal()" class="p-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="p-5 sm:p-8 overflow-y-auto space-y-8 flex-1">
+                <!-- Original Text -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2"><i class="fa-solid fa-align-left mr-1"></i> Teks Berita / Cerita Asli:</h4>
+                    <div id="modalBodyText" class="text-xs sm:text-sm leading-relaxed text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-950 p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <!-- Dynamic Text -->
+                    </div>
+                </div>
+
+                <!-- Deep Logic Analysis Container -->
+                <div class="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-indigo-50/80 via-purple-50/50 to-pink-50/80 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-pink-950/40 border border-indigo-200 dark:border-indigo-800/80 space-y-6">
+                    <div class="flex items-center gap-2 text-indigo-800 dark:text-indigo-200 font-extrabold text-base">
+                        <i class="fa-solid fa-square-root-variable text-xl"></i>
+                        Bedah Komprehensif Logika Informatika
+                    </div>
+
+                    <!-- 1. Proposisi p & q -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-slate-800 space-y-1">
+                            <span class="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase">Proposisi p (Sebab / Antecedent)</span>
+                            <p id="modalPropP" class="text-xs font-semibold text-slate-800 dark:text-slate-200">"..."</p>
+                            <span class="inline-block text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Nilai: BENAR (T)</span>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-slate-800 space-y-1">
+                            <span class="text-[10px] font-black text-purple-600 dark:text-purple-400 uppercase">Proposisi q (Akibat / Consequent)</span>
+                            <p id="modalPropQ" class="text-xs font-semibold text-slate-800 dark:text-slate-200">"..."</p>
+                            <span class="inline-block text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Nilai: BENAR (T)</span>
+                        </div>
+                    </div>
+
+                    <!-- 1B. Identifikasi Ekstrak Proposisi Teks (Khusus Cerita / Teks) -->
+                    <div id="modalIdentifikasiProposisiWrapper" class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-purple-200 dark:border-purple-800 space-y-3">
+                        <span class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase flex items-center gap-1">
+                            <i class="fa-solid fa-list-check"></i> Identifikasi Proposisi &amp; Bentuk Logika dari Kalimat Teks:
+                        </span>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs font-mono truth-table bg-white dark:bg-slate-900 rounded-xl">
+                                <thead class="bg-purple-100 dark:bg-purple-950 text-purple-900 dark:text-purple-200 font-bold">
+                                    <tr>
+                                        <th>Simbol</th>
+                                        <th class="text-left">Kalimat Pernyataan dalam Teks</th>
+                                        <th>Bentuk Logika</th>
+                                        <th>Nilai Kebeneran</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modalIdentifikasiProposisiBody">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 2. Premis & Inferensi Logika -->
+                    <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-indigo-200 dark:border-slate-800">
+                        <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase flex items-center gap-1 mb-2">
+                            <i class="fa-solid fa-diagram-project"></i> Konstruksi Premis &amp; Inferensi Logika:
+                        </span>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
+                            <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                                <span class="text-[10px] font-bold text-slate-400">PREMIS 1 (Implikasi Utama):</span>
+                                <p id="modalPremis1" class="font-semibold text-slate-800 dark:text-slate-200 mt-1">p &rarr; q</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                                <span class="text-[10px] font-bold text-slate-400">PREMIS 2 (Kondisi Nyata):</span>
+                                <p id="modalPremis2" class="font-semibold text-slate-800 dark:text-slate-200 mt-1">p</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800">
+                                <span class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400">INFERENSI (Modus Ponens):</span>
+                                <p id="modalInferensi" class="font-bold text-indigo-900 dark:text-indigo-200 mt-1">Kesimpulan Valid: q</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Variasi Implikasi Table -->
+                    <div>
+                        <h5 class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2 flex items-center gap-1">
+                            <i class="fa-solid fa-arrows-split-up-and-left"></i> Variasi Implikasi (Konvers, Invers, Kontraposisi):
+                        </h5>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs font-mono truth-table bg-white dark:bg-slate-900 rounded-xl">
+                                <thead class="bg-indigo-100 dark:bg-indigo-950 text-indigo-900 dark:text-indigo-200 font-bold">
+                                    <tr>
+                                        <th>Bentuk Logika</th>
+                                        <th>Notasi Simbol</th>
+                                        <th class="text-left">Kalimat Pernyataan Bahasa Indonesia</th>
+                                        <th>Nilai Kebeneran</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modalVariasiTableBody">
+                                    <!-- Dynamic Variasi Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 4. Kuantor Logika -->
+                    <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/80">
+                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase flex items-center gap-1 mb-2">
+                            <i class="fa-solid fa-infinity"></i> Analisis Kuantor Predikat (&forall; &amp; &exist;):
+                        </span>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div class="p-3 rounded-lg bg-emerald-50/50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900">
+                                <span class="font-extrabold text-emerald-800 dark:text-emerald-300">Kuantor Universal (&forall;x):</span>
+                                <p id="modalKuantorUniversal" class="mt-1 font-mono text-[11px] text-slate-700 dark:text-slate-300">"..."</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900">
+                                <span class="font-extrabold text-indigo-800 dark:text-indigo-300">Kuantor Eksistensial (&exist;x):</span>
+                                <p id="modalKuantorEksistensial" class="mt-1 font-mono text-[11px] text-slate-700 dark:text-slate-300">"..."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Truth Table Reference Matrix -->
+                    <div>
+                        <h5 class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-2">
+                            Tabel Kebeneran Implikasi Matrix (p &rarr; q):
+                        </h5>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs font-mono truth-table bg-white dark:bg-slate-900 rounded-xl">
+                                <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold">
+                                    <tr>
+                                        <th>Kondisi</th>
+                                        <th>p (Sebab)</th>
+                                        <th>q (Akibat)</th>
+                                        <th>p &rarr; q</th>
+                                        <th class="text-left">Status Refleksi Realitas</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modalTruthTableBody">
+                                    <!-- Dynamic Truth Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 flex justify-end">
+                <button onclick="closeModal()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md">
+                    Tutup Evaluasi Logika
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Database 5 Berita Fakta + 1 Cerita Rakyat
+        const articlesData = [
+            {
+                id: 1,
+                category: "fakta",
+                categoryLabel: "Berita Fakta 1 — Teknologi",
+                title: "Pemerintah Tingkatkan Infrastruktur Pusat Data AI Nasional di Indonesia",
+                date: "21 September 2026",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+                snippet: "Kementerian Kominfo mempercepat pembangunan fasilitas pusat data AI guna mendukung kedaulatan digital nasional.",
+                content: `Kementerian Komunikasi dan Informatika secara resmi mempercepat pengembangan fasilitas Pusat Data Kecerdasan Buatan (AI) Nasional. <span class="bg-indigo-100/80 dark:bg-indigo-950/80 border-l-4 border-indigo-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-indigo-600 dark:text-indigo-300 font-mono">[p]</strong> Pemerintah membangun fasilitas infrastruktur pusat data AI nasional.</span> Proyek ini bertujuan untuk menyediakan daya komputasi tinggi bagi peneliti, startup, dan lembaga pemerintah dalam mengolah data berskala besar secara aman di dalam negeri. <span class="bg-purple-100/80 dark:bg-purple-950/80 border-l-4 border-purple-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-purple-600 dark:text-purple-300 font-mono">[q]</strong> Dengan adanya fasilitas ini, kedaulatan data dan kemandirian teknologi digital Indonesia diproyeksikan meningkat pesat.</span>`,
+                propP: "Pemerintah membangun fasilitas infrastruktur pusat data AI nasional.",
+                propQ: "Kedaulatan data dan kemandirian teknologi digital Indonesia meningkat.",
+                premis1: "Jika Pemerintah membangun fasilitas pusat data AI nasional (p), maka Kedaulatan data Indonesia meningkat (q).",
+                premis2: "Pemerintah telah membangun fasilitas pusat data AI nasional (p).",
+                inferensi: "Sesuai Modus Ponens, disimpulkan bahwa Kedaulatan data Indonesia meningkat (q). [VALID]",
+                implikasi: "Jika pemerintah membangun fasilitas pusat data AI nasional, maka kedaulatan data Indonesia meningkat.",
+                konvers: "Jika kedaulatan data Indonesia meningkat, maka pemerintah membangun fasilitas pusat data AI nasional.",
+                invers: "Jika pemerintah tidak membangun fasilitas pusat data AI nasional, maka kedaulatan data Indonesia tidak meningkat.",
+                kontraposisi: "Jika kedaulatan data Indonesia tidak meningkat, maka pemerintah tidak membangun fasilitas pusat data AI nasional.",
+                kuantorUniversal: "∀x ∈ Peneliti_Indonesia, x membutuhkan daya komputasi pusat data AI nasional.",
+                kuantorEksistensial: "∃x ∈ Lembaga_Pemerintah, x mengolah data berskala besar di pusat data AI nasional.",
+                pVal: true,
+                qVal: true
+            },
+            {
+                id: 2,
+                category: "fakta",
+                categoryLabel: "Berita Fakta 2 — Lingkungan",
+                title: "BMKG Terbitkan Peringatan Dini Cuaca Ekstrem Jelang Puncak Musim Hujan",
+                date: "20 September 2026",
+                image: "https://images.unsplash.com/photo-1509803874385-db7c23652552?auto=format&fit=crop&w=600&q=80",
+                snippet: "BMKG mengimbau masyarakat pesisir untuk waspada terhadap potensi gelombang tinggi dan hujan ekstrem.",
+                content: `Badan Meteorologi, Klimatologi, dan Geofisika (BMKG) mendeteksi adanya pola pembentukan awan konvektif secara masif di beberapa wilayah Indonesia. <span class="bg-indigo-100/80 dark:bg-indigo-950/80 border-l-4 border-indigo-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-indigo-600 dark:text-indigo-300 font-mono">[p]</strong> BMKG menerbitkan peringatan dini cuaca ekstrem di kawasan pesisir.</span> Fenomena ini diprediksi menyebabkan intensitas hujan ekstrem dan potensi banjir rob di daratan pesisir. <span class="bg-purple-100/80 dark:bg-purple-950/80 border-l-4 border-purple-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-purple-600 dark:text-purple-300 font-mono">[q]</strong> BPBD dan warga mengaktifkan prosedur siaga bencana banjir rob.</span>`,
+                propP: "BMKG menerbitkan peringatan dini cuaca ekstrem di kawasan pesisir.",
+                propQ: "BPBD dan warga mengaktifkan prosedur siaga bencana banjir rob.",
+                premis1: "Jika BMKG menerbitkan peringatan dini cuaca ekstrem (p), maka BPBD mengaktifkan siaga bencana (q).",
+                premis2: "BMKG menerbitkan peringatan dini cuaca ekstrem di pesisir (p).",
+                inferensi: "Sesuai Modus Ponens, disimpulkan bahwa BPBD mengaktifkan siaga bencana banjir rob (q). [VALID]",
+                implikasi: "Jika BMKG menerbitkan peringatan dini cuaca ekstrem, maka BPBD mengaktifkan prosedur siaga bencana.",
+                konvers: "Jika BPBD mengaktifkan prosedur siaga bencana, maka BMKG menerbitkan peringatan dini cuaca ekstrem.",
+                invers: "Jika BMKG tidak menerbitkan peringatan dini cuaca ekstrem, maka BPBD tidak mengaktifkan prosedur siaga bencana.",
+                kontraposisi: "Jika BPBD tidak mengaktifkan prosedur siaga bencana, maka BMKG tidak menerbitkan peringatan dini cuaca ekstrem.",
+                kuantorUniversal: "∀x ∈ Wilayah_Pesisir, x berpotensi mengalami hujan ekstrem dan gelombang tinggi.",
+                kuantorEksistensial: "∃x ∈ Daerah_Pesisir, x mengaktifkan prosedur kesiapsiagaan bencana banjir rob.",
+                pVal: true,
+                qVal: true
+            },
+            {
+                id: 3,
+                category: "fakta",
+                categoryLabel: "Berita Fakta 3 — Infrastruktur",
+                title: "Perluasan Rute MRT Jakarta Jalur Timur-Barat Resmi Dimulai",
+                date: "18 September 2026",
+                image: "https://images.unsplash.com/photo-1515165562839-538804960ab4?auto=format&fit=crop&w=600&q=80",
+                snippet: "Proyek MRT fase anyar menghubungkan Medan Satria hingga Tomang untuk mengurangi kemacetan parah.",
+                content: `Pemerintah Provinsi DKI Jakarta bekerjasama dengan PT MRT Jakarta memulai pengerjaan fisik jalur MRT East-West Phase 1. <span class="bg-indigo-100/80 dark:bg-indigo-950/80 border-l-4 border-indigo-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-indigo-600 dark:text-indigo-300 font-mono">[p]</strong> Jalur MRT Timur-Barat mulai beroperasi dan memperluas integrasi rute.</span> Moda transportasi massal ini ditargetkan mampu mengangkut hingga 280.000 penumpang per hari. <span class="bg-purple-100/80 dark:bg-purple-950/80 border-l-4 border-purple-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-purple-600 dark:text-purple-300 font-mono">[q]</strong> Volume kendaraan pribadi dan kemacetan di koridor perkotaan berkurang.</span>`,
+                propP: "Jalur MRT Timur-Barat mulai beroperasi dan memperluas integrasi rute.",
+                propQ: "Volume kendaraan pribadi dan kemacetan di koridor perkotaan berkurang.",
+                premis1: "Jika jalur MRT Timur-Barat beroperasi (p), maka volume kendaraan pribadi berkurang (q).",
+                premis2: "Jalur MRT Timur-Barat telah resmi mulai beroperasi (p).",
+                inferensi: "Sesuai Modus Ponens, disimpulkan bahwa volume kendaraan pribadi di koridor perkotaan berkurang (q). [VALID]",
+                implikasi: "Jika jalur MRT Timur-Barat beroperasi, maka volume kendaraan pribadi di perkotaan berkurang.",
+                konvers: "Jika volume kendaraan pribadi di perkotaan berkurang, maka jalur MRT Timur-Barat beroperasi.",
+                invers: "Jika jalur MRT Timur-Barat tidak beroperasi, maka volume kendaraan pribadi di perkotaan tidak berkurang.",
+                kontraposisi: "Jika volume kendaraan pribadi di perkotaan tidak berkurang, maka jalur MRT Timur-Barat tidak beroperasi.",
+                kuantorUniversal: "∀x ∈ Koridor_Perkotaan, x membutuhkan moda transportasi massal terintegrasi.",
+                kuantorEksistensial: "∃x ∈ Warga_Perkotaan, x beralih menggunakan kereta MRT untuk mobilitas harian.",
+                pVal: true,
+                qVal: true
+            },
+            {
+                id: 4,
+                category: "fakta",
+                categoryLabel: "Berita Fakta 4 — Olahraga",
+                title: "Timnas Indonesia Amankan Tiket Kualifikasi Piala Dunia Mendatang",
+                date: "15 September 2026",
+                image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=600&q=80",
+                snippet: "Kemenangan beruntun di laga kandang memastikan langkah Garuda melaju ke babak krusial kualifikasi.",
+                content: `<span class="bg-indigo-100/80 dark:bg-indigo-950/80 border-l-4 border-indigo-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-indigo-600 dark:text-indigo-300 font-mono">[p]</strong> Timnas Indonesia meraih kemenangan konsisten pada babak kualifikasi.</span> Skuad Garuda berhasil memetik poin penuh dalam babak lanjutan kualifikasi kawasan Asia dengan disiplin taktik. <span class="bg-purple-100/80 dark:bg-purple-950/80 border-l-4 border-purple-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-purple-600 dark:text-purple-300 font-mono">[q]</strong> Peringkat FIFA Timnas Indonesia melesat naik ke posisi yang lebih tinggi.</span>`,
+                propP: "Timnas Indonesia meraih kemenangan konsisten pada babak kualifikasi.",
+                propQ: "Peringkat FIFA Timnas Indonesia melesat naik ke posisi yang lebih tinggi.",
+                premis1: "Jika Timnas Indonesia meraih kemenangan konsisten (p), maka peringkat FIFA melesat naik (q).",
+                premis2: "Timnas Indonesia meraih kemenangan konsisten dalam kualifikasi (p).",
+                inferensi: "Sesuai Modus Ponens, disimpulkan bahwa peringkat FIFA Timnas Indonesia melesat naik (q). [VALID]",
+                implikasi: "Jika Timnas Indonesia meraih kemenangan konsisten, maka peringkat FIFA melesat naik.",
+                konvers: "Jika peringkat FIFA melesat naik, maka Timnas Indonesia meraih kemenangan konsisten.",
+                invers: "Jika Timnas Indonesia tidak meraih kemenangan konsisten, maka peringkat FIFA tidak melesat naik.",
+                kontraposisi: "Jika peringkat FIFA tidak melesat naik, maka Timnas Indonesia tidak meraih kemenangan konsisten.",
+                kuantorUniversal: "∀x ∈ Pemain_Timnas, x menerapkan taktik disiplin tinggi di lapangan.",
+                kuantorEksistensial: "∃x ∈ Pertandingan_Kualifikasi, x dimenangkan oleh Timnas Indonesia dengan poin penuh.",
+                pVal: true,
+                qVal: true
+            },
+            {
+                id: 5,
+                category: "fakta",
+                categoryLabel: "Berita Fakta 5 — Pendidikan",
+                title: "Program Kurikulum Literasi Digital Wajib Diterapkan di Seluruh Sekolah",
+                date: "12 September 2026",
+                image: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=600&q=80",
+                snippet: "Mendikbudristek meluncurkan modul keamanan siber dan etika AI sebagai pelajaran wajib.",
+                content: `<span class="bg-indigo-100/80 dark:bg-indigo-950/80 border-l-4 border-indigo-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-indigo-600 dark:text-indigo-300 font-mono">[p]</strong> Siswa sekolah mendapatkan pelatihan kurikulum literasi digital dan etika AI.</span> Untuk membentengi generasi muda dari ancaman informasi palsu, Kementerian Pendidikan mewajibkan pelajaran literasi digital. <span class="bg-purple-100/80 dark:bg-purple-950/80 border-l-4 border-purple-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-purple-600 dark:text-purple-300 font-mono">[q]</strong> Kemampuan kritis siswa dalam memfilter berita hoaks meningkat pesat.</span>`,
+                propP: "Siswa sekolah mendapatkan pelatihan kurikulum literasi digital dan etika AI.",
+                propQ: "Kemampuan kritis siswa dalam memfilter berita hoaks meningkat pesat.",
+                premis1: "Jika siswa mendapat pelatihan literasi digital (p), maka kemampuan memfilter hoaks meningkat (q).",
+                premis2: "Siswa sekolah mendapat pelatihan kurikulum literasi digital (p).",
+                inferensi: "Sesuai Modus Ponens, disimpulkan bahwa kemampuan kritis siswa memfilter hoaks meningkat (q). [VALID]",
+                implikasi: "Jika siswa mendapat pelatihan literasi digital, maka kemampuan memfilter hoaks meningkat.",
+                konvers: "Jika kemampuan memfilter hoaks meningkat, maka siswa mendapat pelatihan literasi digital.",
+                invers: "Jika siswa tidak mendapat pelatihan literasi digital, maka kemampuan memfilter hoaks tidak meningkat.",
+                kontraposisi: "Jika kemampuan memfilter hoaks tidak meningkat, maka siswa tidak mendapat pelatihan literasi digital.",
+                kuantorUniversal: "∀x ∈ Sekolah_SMP_SMA, x wajib menerapkan pelajaran literasi digital.",
+                kuantorEksistensial: "∃x ∈ Siswa_Sekolah, x mampu memverifikasi kebenaran informasi hoaks secara kritis.",
+                pVal: true,
+                qVal: true
+            },
+            {
+                id: 6,
+                category: "folklore",
+                categoryLabel: "Cerita Rakyat Nusantara",
+                title: "Legenda Malin Kundang: Kedharkaan Anak dan Keramat Doa Seorang Ibu",
+                date: "Cerita Rakyat Minangkabau",
+                image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=80",
+                snippet: "Kisah lengkap Malin Kundang dari masa miskin di Pantai Air Manis, merantau menjadi saudagar kaya, hingga durhaka dan dikutuk menjadi batu.",
+                content: `<span class="bg-indigo-100/80 dark:bg-indigo-950/80 border-l-4 border-indigo-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-indigo-600 dark:text-indigo-300 font-mono">[p₁]</strong> Di pesisir Pantai Air Manis, Padang, Sumatera Barat, hiduplah seorang janda miskin bernama Mande Rubayah bersama putra tunggalnya, Malin Kundang.</span> Mereka hidup serba kekurangan dan hanya mengandalkan hasil tangkapan ikan serta kebaikan tetangga. Meski hidup prihatin, Mande Rubayah sangat mencintai dan membesarkan Malin dengan penuh kasih sayang.
+
+Ketika beranjak dewasa, Malin Kundang merasa prihatin dengan kemiskinan ibunya. <span class="bg-purple-100/80 dark:bg-purple-950/80 border-l-4 border-purple-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-purple-600 dark:text-purple-300 font-mono">[p₂]</strong> Ia meminta izin kepada Mande Rubayah untuk merantau mengadu nasib dengan menumpang kapal dagang yang merapat di dermaga.</span> Dengan berat hati dan diiringi doa serta tetesan air mata, sang ibu merelakan kepergian Malin Kundang dan berjanji akan selalu menanti kepulangannya.
+
+Berkat kerja keras dan ketekunannya di negeri seberang, <span class="bg-blue-100/80 dark:bg-blue-950/80 border-l-4 border-blue-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-blue-600 dark:text-blue-300 font-mono">[p₃]</strong> Malin Kundang berhasil mengubah nasibnya dan menjadi seorang saudagar kaya raya</span> yang memiliki puluhan kapal dagang megah dan ratusan anak buah kapal. <span class="bg-pink-100/80 dark:bg-pink-950/80 border-l-4 border-pink-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-pink-600 dark:text-pink-300 font-mono">[p₄]</strong> Malin juga menikahi seorang putri bangsawan yang sangat cantik.</span> Namun, kesuksesan dan kekayaan melimpah itu perlahan membuat Malin menjadi sombong dan lupa akan asal-usulnya.
+
+Bertahun-tahun berlalu, kapal megah Malin Kundang berlabuh di pantai kampung halamannya di Pantai Air Manis. Berita kepulangan Malin segera terdengar oleh Mande Rubayah. <span class="bg-amber-100/80 dark:bg-amber-950/80 border-l-4 border-amber-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-amber-600 dark:text-amber-300 font-mono">[p₅]</strong> Dengan tubuh yang makin renta, sang ibu berlari menuju dermaga untuk memeluk anak kesayangannya.</span> Namun saat Mande Rubayah menyapa dan hendak memeluknya, <span class="bg-rose-100/80 dark:bg-rose-950/80 border-l-4 border-rose-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-rose-600 dark:text-rose-300 font-mono">[p₆]</strong> Malin Kundang merasa sangat malu di hadapan istri cantiknya dan membentak ibu kandungnya.</span>
+
+Malin Kundang membentak, mendorong Mande Rubayah hingga terjatuh ke pasir, dan berteriak, <span class="bg-red-100/80 dark:bg-red-950/80 border-l-4 border-red-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-red-600 dark:text-red-300 font-mono">[p₇]</strong> "Wanita tua pengemis ini bukan ibuku! Ibuku tidak sekotor dan sekerdil ini!"</span> Mande Rubayah menangis tersedu-sedu dan merasa sangat terzalimi oleh anak yang dibesarkannya dengan penuh pengorbanan.
+
+Dengan hati yang hancur, <span class="bg-cyan-100/80 dark:bg-cyan-950/80 border-l-4 border-cyan-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-cyan-600 dark:text-cyan-300 font-mono">[p₈]</strong> Mande Rubayah berlutut menengadahkan tangan ke langit dan berdoa memohon keadilan atas kedharkaan anaknya.</span>
+
+Seketika itu juga, langit yang cerah berubah menjadi gelap gulita. Angin topan bertiup kencang dan petir menyambar-nyambar. <span class="bg-emerald-100/80 dark:bg-emerald-950/80 border-l-4 border-emerald-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-emerald-600 dark:text-emerald-300 font-mono">[p₉]</strong> Badai dahsyat menghancurkan kapal megah Malin Kundang hingga berkeping-keping.</span> Malin Kundang yang ketakutan tersungkur berlutut memohon ampun, namun penyesalannya sudah terlambat. <span class="bg-teal-100/80 dark:bg-teal-950/80 border-l-4 border-teal-500 px-2 py-0.5 rounded my-1 inline-block"><strong class="text-teal-600 dark:text-teal-300 font-mono">[p₁₀]</strong> Tubuh Malin Kundang perlahan-lahan mengeras dan berubah menjadi batu di tepi pantai</span>, menjadi simbol abadi peringatan bagi anak yang durhaka kepada ibunya.`,
+                propP: "Malin Kundang durhaka dan menolak mengakui ibu kandungnya (Mande Rubayah).",
+                propQ: "Malin Kundang mendapat petaka kutukan dan tubuhnya berubah menjadi batu.",
+                premis1: "Jika Malin Kundang durhaka dan menolak mengakui ibunya (p), maka Malin Kundang dikutuk menjadi batu (q).",
+                premis2: "Malin Kundang secara nyata durhaka dan membentak ibu kandungnya (p).",
+                inferensi: "Sesuai aturan Modus Ponens (p → q, p ⊢ q), disimpulkan secara sahih bahwa Malin Kundang dikutuk menjadi batu di tepi Pantai Air Manis (q). [VALID]",
+                implikasi: "Jika Malin Kundang durhaka kepada ibunya, maka Malin Kundang dikutuk menjadi batu.",
+                konvers: "Jika Malin Kundang dikutuk menjadi batu, maka Malin Kundang durhaka kepada ibunya.",
+                invers: "Jika Malin Kundang tidak durhaka kepada ibunya, maka Malin Kundang tidak dikutuk menjadi batu.",
+                kontraposisi: "Jika Malin Kundang tidak dikutuk menjadi batu, maka Malin Kundang tidak durhaka kepada ibunya.",
+                kuantorUniversal: "∀x ∈ Anak, x(Berkewajiban_Berbakti_Kepada_Orang_Tua)",
+                kuantorEksistensial: "∃x ∈ Pesisir_Pantai_Air_Manis, x(Merupakan_Peninggalan_Batu_Malin_Kundang)",
+                proposisiList: [
+                    { simbol: "p₁", teks: "Malin Kundang hidup miskin bersama Mande Rubayah di Pantai Air Manis.", bentuk: "Proposisi Majemuk (Konjungsi A ∧ B)", val: "BENAR (T)" },
+                    { simbol: "p₂", teks: "Malin Kundang merantau mengadu nasib dengan menumpang kapal dagang.", bentuk: "Proposisi Tunggal (Atomik)", val: "BENAR (T)" },
+                    { simbol: "p₃", teks: "Malin Kundang bekerja keras dan menjadi saudagar kaya raya.", bentuk: "Proposisi Majemuk (Konjungsi C ∧ D)", val: "BENAR (T)" },
+                    { simbol: "p₄", teks: "Malin Kundang menikahi seorang putri bangsawan.", bentuk: "Proposisi Tunggal (Atomik)", val: "BENAR (T)" },
+                    { simbol: "p₅", teks: "Mande Rubayah berlari ke dermaga untuk menyambut Malin Kundang.", bentuk: "Proposisi Tunggal (Atomik)", val: "BENAR (T)" },
+                    { simbol: "p₆", teks: "Malin Kundang merasa malu dan membentak ibu kandungnya.", bentuk: "Proposisi Majemuk (Konjungsi E ∧ F)", val: "BENAR (T)" },
+                    { simbol: "p₇", teks: "Malin Kundang tidak mengakui Mande Rubayah sebagai ibunya.", bentuk: "Proposisi Negasi (¬G)", val: "BENAR (T)" },
+                    { simbol: "p₈", teks: "Mande Rubayah berdoa memohon keadilan atas kedharkaan anaknya.", bentuk: "Proposisi Tunggal (Atomik)", val: "BENAR (T)" },
+                    { simbol: "p₉", teks: "Badai dahsyat menghantam kapal Malin Kundang hingga hancur.", bentuk: "Proposisi Tunggal (Atomik)", val: "BENAR (T)" },
+                    { simbol: "p₁₀", teks: "Tubuh Malin Kundang berubah menjadi batu di tepi pantai.", bentuk: "Proposisi Tunggal (Atomik)", val: "BENAR (T)" }
+                ],
+                pVal: true,
+                qVal: true
+            }
+        ];
+
+        // Render Articles Grid
+        function renderArticles(articlesToRender) {
+            const grid = document.getElementById('articlesGrid');
+            grid.innerHTML = '';
+
+            if(articlesToRender.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fa-solid fa-folder-open text-4xl text-slate-400 mb-3"></i>
+                        <p class="text-slate-500 font-medium text-sm">Tidak ada artikel yang cocok dengan pencarian Anda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            articlesToRender.forEach(art => {
+                const isFolklore = art.category === 'folklore';
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col group border border-slate-200 dark:border-slate-800";
+                
+                card.innerHTML = `
+                    <div class="relative h-48 overflow-hidden bg-slate-200">
+                        <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/4f46e5/ffffff?text=LogiBlog'">
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wide ${isFolklore ? 'bg-amber-500 text-white shadow-lg' : 'bg-indigo-600 text-white shadow-lg'}">
+                            ${isFolklore ? 'Cerita Rakyat' : 'Berita Fakta'}
+                        </span>
+                    </div>
+
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-[11px] font-bold text-slate-400"><i class="fa-regular fa-calendar mr-1"></i>${art.date}</span>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white mt-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2">
+                                ${art.title}
+                            </h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 line-clamp-2">
+                                ${art.snippet}
+                            </p>
+                        </div>
+
+                        <!-- Mini Logic Indicators -->
+                        <div class="space-y-1.5 pt-2 border-t border-slate-200 dark:border-slate-800 text-[11px]">
+                            <div class="font-bold text-indigo-600 dark:text-indigo-400 flex items-center justify-between">
+                                <span><i class="fa-solid fa-arrows-split-up-and-left mr-1"></i> Implikasi (p &rarr; q):</span>
+                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold">BENAR</span>
+                            </div>
+                            <p class="font-mono text-[10px] text-slate-700 dark:text-slate-300 italic line-clamp-1">
+                                "${art.implikasi}"
+                            </p>
+                            <div class="flex flex-wrap gap-1 text-[9px] font-mono text-slate-500 dark:text-slate-400 pt-1">
+                                <span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Konvers: B</span>
+                                <span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Invers: B</span>
+                                <span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">Kontraposisi: B</span>
+                            </div>
+                        </div>
+
+                        <button onclick="openModal(${art.id})" class="w-full py-2.5 rounded-xl bg-slate-900 dark:bg-slate-100 hover:bg-indigo-600 dark:hover:bg-indigo-500 text-white dark:text-slate-900 dark:hover:text-white text-xs font-extrabold transition-all flex items-center justify-center gap-2 shadow-sm">
+                            <span>Bedah Logika Lengkap</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Function
+        function filterArticles(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-slate-200', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+            });
+
+            const activeBtn = document.querySelector(`[data-filter="${type}"]`);
+            if(activeBtn) {
+                activeBtn.classList.remove('bg-slate-200', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+            }
+
+            if(type === 'all') {
+                renderArticles(articlesData);
+            } else {
+                const filtered = articlesData.filter(a => a.category === type);
+                renderArticles(filtered);
+            }
+        }
+
+        // Search Function
+        function searchArticles() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = articlesData.filter(a => 
+                a.title.toLowerCase().includes(query) ||
+                a.implikasi.toLowerCase().includes(query) ||
+                a.konvers.toLowerCase().includes(query) ||
+                a.kontraposisi.toLowerCase().includes(query) ||
+                a.content.toLowerCase().includes(query)
+            );
+            renderArticles(filtered);
+        }
+
+        // Open Modal Breakdown
+        function openModal(id) {
+            const art = articlesData.find(a => a.id === id);
+            if(!art) return;
+
+            document.getElementById('modalCategoryBadge').textContent = art.categoryLabel;
+            document.getElementById('modalTitle').textContent = art.title;
+            document.getElementById('modalMeta').textContent = `Tanggal/Sumber: ${art.date} | Kategori: ${art.category === 'fakta' ? 'Berita Fakta Real-Time' : 'Cerita Rakyat Nusantara'}`;
+            
+            // Format paragraph content correctly + Add Notice Badge
+            const formattedContent = art.content.split('\n\n').map(p => `<p class="mb-3 leading-relaxed">${p}</p>`).join('');
+            const highlightNotice = art.category === 'folklore' 
+                ? `<div class="mb-4 p-3 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-highlighter text-amber-600 text-sm"></i> <span>Teks di bawah ini telah di-highlight dengan label <strong class="font-mono text-indigo-600 dark:text-indigo-400 font-extrabold">[p₁] - [p₁₀]</strong> untuk menandai kalimat proposisi dalam narasi cerita.</span></div>`
+                : `<div class="mb-4 p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-900 dark:text-indigo-200 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-highlighter text-indigo-600 text-sm"></i> <span>Teks di bawah ini di-highlight dengan label <strong class="font-mono text-indigo-600 dark:text-indigo-400 font-extrabold">[p]</strong> (Sebab) dan <strong class="font-mono text-purple-600 dark:text-purple-400 font-extrabold">[q]</strong> (Akibat).</span></div>`;
+            
+            document.getElementById('modalBodyText').innerHTML = highlightNotice + formattedContent;
+            
+            // Proposisi p & q
+            document.getElementById('modalPropP').textContent = `"${art.propP}"`;
+            document.getElementById('modalPropQ').textContent = `"${art.propQ}"`;
+
+            // Identifikasi Proposisi List (Khusus Teks Lengkap)
+            const idPropWrapper = document.getElementById('modalIdentifikasiProposisiWrapper');
+            const idPropBody = document.getElementById('modalIdentifikasiProposisiBody');
+            
+            if (art.proposisiList && art.proposisiList.length > 0) {
+                idPropWrapper.classList.remove('hidden');
+                idPropBody.innerHTML = art.proposisiList.map(item => `
+                    <tr>
+                        <td class="font-bold text-indigo-600 dark:text-indigo-400 font-mono">${item.simbol}</td>
+                        <td class="text-left font-sans">${item.teks}</td>
+                        <td class="font-mono text-purple-600 dark:text-purple-400 font-bold">${item.bentuk}</td>
+                        <td><span class="text-emerald-600 font-bold text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950">${item.val}</span></td>
+                    </tr>
+                `).join('');
+            } else {
+                // Default fallback for standard fact news
+                idPropWrapper.classList.remove('hidden');
+                idPropBody.innerHTML = `
+                    <tr>
+                        <td class="font-bold text-indigo-600 dark:text-indigo-400 font-mono">p</td>
+                        <td class="text-left font-sans">${art.propP}</td>
+                        <td class="font-mono text-purple-600 dark:text-purple-400 font-bold">Proposisi Tunggal (Sebab / Antecedent)</td>
+                        <td><span class="text-emerald-600 font-bold text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950">BENAR (T)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-purple-600 dark:text-purple-400 font-mono">q</td>
+                        <td class="text-left font-sans">${art.propQ}</td>
+                        <td class="font-mono text-purple-600 dark:text-purple-400 font-bold">Proposisi Tunggal (Akibat / Consequent)</td>
+                        <td><span class="text-emerald-600 font-bold text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950">BENAR (T)</span></td>
+                    </tr>
+                `;
+            }
+
+            // Inferensi
+            document.getElementById('modalPremis1').textContent = `p → q: "${art.premis1}"`;
+            document.getElementById('modalPremis2').textContent = `p: "${art.premis2}"`;
+            document.getElementById('modalInferensi').textContent = art.inferensi;
+
+            // Variasi Table
+            const varBody = document.getElementById('modalVariasiTableBody');
+            varBody.innerHTML = `
+                <tr>
+                    <td class="font-bold text-indigo-600 dark:text-indigo-400">Implikasi Utama</td>
+                    <td class="font-bold">p &rarr; q</td>
+                    <td class="text-left">"${art.implikasi}"</td>
+                    <td><span class="text-emerald-600 font-bold">BENAR (T)</span></td>
+                </tr>
+                <tr>
+                    <td class="font-bold text-purple-600 dark:text-purple-400">Konvers (Kebalikan)</td>
+                    <td class="font-bold">q &rarr; p</td>
+                    <td class="text-left">"${art.konvers}"</td>
+                    <td><span class="text-emerald-600 font-bold">BENAR (T)</span></td>
+                </tr>
+                <tr>
+                    <td class="font-bold text-pink-600 dark:text-pink-400">Invers (Negasi)</td>
+                    <td class="font-bold">&not;p &rarr; &not;q</td>
+                    <td class="text-left">"${art.invers}"</td>
+                    <td><span class="text-emerald-600 font-bold">BENAR (T)</span></td>
+                </tr>
+                <tr>
+                    <td class="font-bold text-emerald-600 dark:text-emerald-400">Kontraposisi</td>
+                    <td class="font-bold">&not;q &rarr; &not;p</td>
+                    <td class="text-left">"${art.kontraposisi}"</td>
+                    <td><span class="text-emerald-600 font-bold">BENAR (T)</span></td>
+                </tr>
+            `;
+
+            // Kuantor
+            document.getElementById('modalKuantorUniversal').textContent = art.kuantorUniversal;
+            document.getElementById('modalKuantorEksistensial').textContent = art.kuantorEksistensial;
+
+            // Truth Table Matrix
+            const tbody = document.getElementById('modalTruthTableBody');
+            tbody.innerHTML = `
+                <tr class="bg-emerald-50 dark:bg-emerald-950/40 font-bold">
+                    <td>Kondisi 1 (Realita Artikel)</td>
+                    <td><span class="text-emerald-600">B (1)</span></td>
+                    <td><span class="text-emerald-600">B (1)</span></td>
+                    <td><span class="text-emerald-600 font-extrabold">BENAR (T)</span></td>
+                    <td class="text-left text-[11px]">Sebab Terjadi &amp; Akibat Terbukti &rarr; Pernyataan Valid</td>
+                </tr>
+                <tr>
+                    <td>Kondisi 2 (Konflik)</td>
+                    <td><span class="text-emerald-600">B (1)</span></td>
+                    <td><span class="text-rose-600">S (0)</span></td>
+                    <td><span class="text-rose-600 font-extrabold">SALAH (F)</span></td>
+                    <td class="text-left text-[11px]">Sebab Terjadi tetapi Akibat Tidak Terbukti</td>
+                </tr>
+                <tr>
+                    <td>Kondisi 3 (Alternatif)</td>
+                    <td><span class="text-rose-600">S (0)</span></td>
+                    <td><span class="text-emerald-600">B (1)</span></td>
+                    <td><span class="text-emerald-600 font-extrabold">BENAR (T)</span></td>
+                    <td class="text-left text-[11px]">Sebab Tidak Terjadi, Akibat Muncul dari Faktor Lain</td>
+                </tr>
+                <tr>
+                    <td>Kondisi 4 (Vakum)</td>
+                    <td><span class="text-rose-600">S (0)</span></td>
+                    <td><span class="text-rose-600">S (0)</span></td>
+                    <td><span class="text-emerald-600 font-extrabold">BENAR (T)</span></td>
+                    <td class="text-left text-[11px]">Sebab &amp; Akibat Keduanya Tidak Terjadi</td>
+                </tr>
+            `;
+
+            document.getElementById('articleModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('articleModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Switch Simulator Tabs
+        function switchSimTab(tab) {
+            const tabs = ['implikasi', 'inferensi', 'kuantor'];
+            tabs.forEach(t => {
+                document.getElementById(`simTab${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.add('hidden');
+                const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
+                btn.classList.remove('border-indigo-600', 'text-indigo-600', 'dark:text-indigo-400');
+                btn.classList.add('border-transparent', 'text-slate-500');
+            });
+
+            document.getElementById(`simTab${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tabBtn${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
+            activeBtn.classList.remove('border-transparent', 'text-slate-500');
+            activeBtn.classList.add('border-indigo-600', 'text-indigo-600', 'dark:text-indigo-400');
+        }
+
+        // Calculator Logic
+        function calculateLogic() {
+            const p = document.getElementById('calcP').value === 'true';
+            const q = document.getElementById('calcQ').value === 'true';
+
+            // Truth Values
+            const implikasi = (!p) || q;
+            const konvers = (!q) || p;
+            const invers = p || (!q);
+            const kontraposisi = q || (!p);
+
+            const formatVal = (v) => v 
+                ? `<span class="text-emerald-500">BENAR (T)</span>` 
+                : `<span class="text-rose-500">SALAH (F)</span>`;
+
+            document.getElementById('resImplikasi').innerHTML = formatVal(implikasi);
+            document.getElementById('resKonvers').innerHTML = formatVal(konvers);
+            document.getElementById('resInvers').innerHTML = formatVal(invers);
+            document.getElementById('resKontraposisi').innerHTML = formatVal(kontraposisi);
+
+            // Matrix Rows
+            const matrixBody = document.getElementById('calcMatrixBody');
+            const combinations = [
+                { p: true, q: true },
+                { p: true, q: false },
+                { p: false, q: true },
+                { p: false, q: false }
+            ];
+
+            matrixBody.innerHTML = combinations.map(comb => {
+                const imp = (!comb.p) || comb.q;
+                const konv = (!comb.q) || comb.p;
+                const inv = comb.p || (!comb.q);
+                const kontr = comb.q || (!comb.p);
+
+                const isCurrentRow = (comb.p === p) && (comb.q === q);
+
+                return `
+                    <tr class="${isCurrentRow ? 'bg-indigo-100 dark:bg-indigo-950/80 font-extrabold text-indigo-900 dark:text-indigo-200' : ''}">
+                        <td>${comb.p ? 'B (1)' : 'S (0)'}</td>
+                        <td>${comb.q ? 'B (1)' : 'S (0)'}</td>
+                        <td class="${imp ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600'}">${imp ? 'T' : 'F'}</td>
+                        <td class="${konv ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600'}">${konv ? 'T' : 'F'}</td>
+                        <td class="${inv ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600'}">${inv ? 'T' : 'F'}</td>
+                        <td class="${kontr ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600'}">${kontr ? 'T' : 'F'}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Dark Theme Toggle
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Initialize App
+        window.onload = function() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+
+            renderArticles(articlesData);
+            calculateLogic();
+        };
+    </script>
+</body>
+</html>
